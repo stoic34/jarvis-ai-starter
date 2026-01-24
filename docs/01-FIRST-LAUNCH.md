@@ -19,7 +19,7 @@ If you haven't already:
 **Or use Git** (if you have it):
 ```bash
 cd ~/Documents
-git clone https://github.com/TarioGroup/jarvis-ai-starter.git
+git clone https://github.com/stoic34/jarvis-ai-starter.git
 ```
 
 ---

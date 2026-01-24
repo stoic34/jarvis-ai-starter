@@ -41,9 +41,9 @@ They see the same files. Just different interfaces.
 | Command | What It Does | Example |
 |---------|--------------|---------|
 | `ls` | **L**i**s**t files in current directory | `ls` → shows all files here |
-| `pwd` | **P**rint **w**orking **d**irectory (where am I?) | `pwd` → `/Users/jeff/Documents` |
+| `pwd` | **P**rint **w**orking **d**irectory (where am I?) | `pwd` → `/Users/yourname/Documents` |
 | `cd [folder]` | **C**hange **d**irectory | `cd Documents` → moves into Documents |
-| `cd ~` | Go to home directory | `cd ~` → goes to `/Users/jeff` |
+| `cd ~` | Go to home directory | `cd ~` → goes to `/Users/yourname` |
 | `cd ..` | Go up one directory | `cd ..` → moves to parent folder |
 
 ### Pro Tips
