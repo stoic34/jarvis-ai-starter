@@ -229,6 +229,120 @@ When drafting emails:
 
 3. **Resolve contacts before drafting** - Verify email addresses
 
+## Tooling Registry
+
+All installed tools are documented in `tools/REGISTRY.md`.
+
+**Before using any tool:**
+1. Check the registry to verify it's installed
+2. Look up example commands
+3. Confirm it's verified as working
+
+**After installing new tools:**
+1. Install and test the tool
+2. Register in `tools/REGISTRY.md`
+3. Mark as verified once confirmed working
+
+---
+
+## Eval Harnesses
+
+For any multi-step task, use an eval harness to ensure complete work.
+
+### What is an Eval Harness?
+
+A self-verification system that:
+1. Creates a checklist of requirements
+2. Works through each item
+3. Verifies each step actually worked
+4. Only claims success when ALL verifications pass
+
+### When to Use
+
+- **Always** for multi-step tasks (3+ steps)
+- **Always** for important tasks
+- **Always** for new task types
+
+### How to Invoke
+
+The user may say:
+- "with an eval harness"
+- "verify each step"
+- "create a checklist and mark each item when verified"
+- "test yourself before claiming success"
+
+### Eval Harness Pattern
+
+```
+**Eval Harness - Task List:**
+- [ ] Step 1
+- [ ] Step 2
+- [ ] Step 3
+
+**Step 1: [Description]**
+[Action taken]
+✓ Verified: [How you verified it worked]
+
+**Step 2: [Description]**
+[Action taken]
+✓ Verified: [How you verified it worked]
+
+...
+
+**Final Verification:**
+- [x] Step 1 - Passed
+- [x] Step 2 - Passed
+- [x] Step 3 - Passed
+
+All tasks completed and verified.
+```
+
+**Never claim success on a multi-step task without self-verification.**
+
+---
+
+## Agent Alias Protocol
+
+When the user says "create my agent alias" or "set up my launch command", help them create a shell alias.
+
+### What the Alias Does
+
+The alias combines:
+1. **Navigate to vault**: `cd ~/Documents/jarvis-ai-starter`
+2. **Launch Claude Code**: `npx @anthropic-ai/claude-code`
+3. **YOLO mode**: `--dangerously-skip-permissions` (skip routine confirmations)
+4. **Browser control**: `--chrome` (enable Claude for Chrome)
+
+### Mac/Linux (add to ~/.zshrc or ~/.bashrc)
+
+```bash
+alias [AGENT_NAME]='cd ~/Documents/jarvis-ai-starter && npx @anthropic-ai/claude-code --dangerously-skip-permissions --chrome'
+```
+
+### Windows Git Bash (add to ~/.bashrc)
+
+```bash
+alias [AGENT_NAME]='cd ~/Documents/jarvis-ai-starter && npx @anthropic-ai/claude-code --dangerously-skip-permissions --chrome'
+```
+
+### Windows PowerShell (add to $PROFILE)
+
+```powershell
+function [AGENT_NAME] {
+    Set-Location "$HOME\Documents\jarvis-ai-starter"
+    npx @anthropic-ai/claude-code --dangerously-skip-permissions --chrome
+}
+```
+
+### After Creating the Alias
+
+1. Detect the user's shell (zsh, bash, PowerShell)
+2. Add the alias to the appropriate profile
+3. Reload the profile or instruct to restart terminal
+4. Test by running the alias
+
+---
+
 ## Security & Privacy
 
 - Never share vault contents externally without explicit approval
@@ -238,4 +352,4 @@ When drafting emails:
 
 ---
 
-*This assistant is powered by Claude Code. For help, see Reference/Getting-Started.md*
+*This assistant is powered by Claude Code. For setup help, see docs/00-PREREQUISITES.md*
