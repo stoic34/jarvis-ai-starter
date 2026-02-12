@@ -1,0 +1,16 @@
+{
+  "name": "mcp-weather-example",
+  "version": "1.0.0",
+  "description": "Simple MCP server that provides weather lookup",
+  "main": "server.js",
+  "type": "module",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.0.4"
+  },
+  "keywords": ["mcp", "weather", "example"],
+  "author": "",
+  "license": "MIT"
+}

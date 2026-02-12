@@ -1,7 +1,22 @@
 {
   "permissions": {
-    "allow": [],
-    "deny": []
-  },
-  "enabledTools": []
+    "allow": [
+      "Bash(python3 tools/*:*)",
+      "Bash(python3 evals/*:*)",
+      "Bash(gogcli:*)",
+      "Bash(git status:*)",
+      "Bash(git diff:*)",
+      "Bash(git log:*)",
+      "Bash(git branch:*)",
+      "Bash(ls:*)",
+      "Bash(which:*)",
+      "Bash(pip3 list:*)",
+      "Bash(pip3 show:*)"
+    ],
+    "deny": [
+      "Bash(rm -rf:*)",
+      "Bash(gogcli gmail send:*)",
+      "Bash(gogcli gmail drafts send:*)"
+    ]
+  }
 }

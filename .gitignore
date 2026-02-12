@@ -34,11 +34,12 @@ ehthumbs.db
 *.env
 
 # Secrets (never commit these)
-*secret*
 *credential*
-*token*
 *.pem
 *.key
+
+# Security blocklist (LOCAL ONLY — contains your private terms)
+.security/blocklist.txt
 
 # Obsidian
 .obsidian/workspace.json

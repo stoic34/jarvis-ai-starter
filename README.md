@@ -1,16 +1,25 @@
 # Jarvis AI Starter Kit
 
-Build your own personal AI assistant in under 90 minutes.
+Build your own personal AI assistant in under 90 minutes. Then grow it into a framework that scales with you.
 
 ---
 
 ## What You Get
 
+**Level 1 — Starter Kit** (90-minute setup)
 - A named AI assistant that knows who you are
 - One-word launch command (just type `jarvis` or your chosen name)
 - Email, calendar, and contacts integration (Google Workspace)
-- Browser automation for complex web tasks
+- Browser automation for web research and tasks
 - Self-verification patterns so your agent actually finishes tasks
+
+**Level 2 — Framework** (included, activate as needed)
+- Skill system with 5 built-in skills (eval harness, code review, session handoff, content ingestion, project setup)
+- Agent specializations (researcher, writer, developer)
+- Session continuity across conversations
+- Prompt templates for daily workflows
+- Software development protocol with quality gates
+- Security infrastructure with pre-commit scanning
 
 ---
 
@@ -20,104 +29,123 @@ Build your own personal AI assistant in under 90 minutes.
 Read [docs/00-PREREQUISITES.md](docs/00-PREREQUISITES.md) first.
 
 You'll need:
-- A laptop (not desktop)
+- A laptop (Mac, Windows, or Linux)
 - Basic terminal knowledge (we teach you)
-- A dictation tool (we recommend one)
 - Google Workspace (Gmail, Google Calendar)
 - A Claude account (Pro or Max recommended)
 
 ### Step 1: First Launch
 Follow [docs/01-FIRST-LAUNCH.md](docs/01-FIRST-LAUNCH.md).
 
-You'll:
 - Download this repo
 - Launch Claude Code (no installation needed)
-- Name your assistant
-- Create your launch alias
-
-**After this step:** Type `jarvis` (or your chosen name) to start your agent.
+- Name your assistant and set up your identity
+- Create your one-word launch alias
 
 ### Step 2: Browser Control
 Follow [docs/02-CHROME-EXTENSION.md](docs/02-CHROME-EXTENSION.md).
 
-You'll:
 - Install Claude for Chrome
 - Enable browser automation
-- Verify your agent can control web pages
-
-**After this step:** Your agent can navigate websites for you.
+- Verify your agent can navigate web pages
 
 ### Step 3: Google Integration
 Follow [docs/03-GOOGLE-INTEGRATION.md](docs/03-GOOGLE-INTEGRATION.md).
 
-You'll:
-- Install gogcli (Google CLI)
-- Set up credentials (Claude navigates Cloud Console for you)
+- Install gogcli (Google Workspace CLI)
+- Set up credentials (your AI navigates Cloud Console for you)
 - Connect email, calendar, and contacts
-
-**After this step:** Your agent can read your email and check your calendar.
 
 ### Step 4: Learn Eval Harnesses
 Read [docs/04-EVAL-HARNESSES.md](docs/04-EVAL-HARNESSES.md).
 
-You'll:
-- Understand why AI agents sometimes claim false success
-- Learn to invoke self-verification
+- Understand the "Horses, Not Cars" mental model
+- Learn to invoke self-verification for reliable results
 - Run your first eval harness
 
-**After this step:** You know how to get reliable results from your agent.
+---
+
+## Architecture
+
+```
+You ──→ Claude Code ──→ CLAUDE.md (instructions)
+              │              workspace/ (your identity + context)
+              │              .claude/ (skills, agents, prompts)
+              │
+              ├──→ gogcli (email, calendar, contacts)
+              ├──→ tools/ (PDF, audio, HTML)
+              ├──→ Chrome (web automation)
+              └──→ vault/ (your knowledge base)
+```
+
+See [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) for the full system diagram.
+
+### Key Directories
+
+| Directory | Purpose |
+|-----------|---------|
+| `workspace/` | Your identity, preferences, tool inventory, current context |
+| `.claude/skills/` | Structured workflows: eval harness, code review, session handoff, content ingestion, project setup |
+| `.claude/agents/` | Specialist agents: researcher, writer, developer |
+| `.claude/prompts/` | Reusable templates: morning routine, project kickoff, research brief, weekly review |
+| `vault/` | Your Obsidian knowledge base (projects, daily notes, reference) |
+| `tools/` | Python scripts: PDF generation, audio transcription, session management |
+| `evals/` | Quality assurance: PII scanner, tool tests |
+| `infrastructure/` | AWS templates: Secrets Manager, Lambda, S3 backup, budget alerts |
+| `mcp/` | MCP server examples and templates for tool integration |
 
 ---
 
 ## What Can Your AI Do?
 
-Once set up, try these:
-
-**Email**
+**Email & Calendar**
 > "Scan my inbox for anything urgent from the last 24 hours"
-
-> "Find all emails from Sarah about the project and summarize them"
-
 > "Draft a reply to John's email about the budget"
-
-**Calendar**
 > "What do I have scheduled this week?"
 
-> "Find a time next Tuesday for a 1-hour meeting"
-
-> "Block 2 hours tomorrow morning for deep work"
-
 **Research**
-> "Research the top 5 CRM tools and compare their pricing"
-
-> "Find information about [topic] and create a summary note"
+> "Research the top 5 CRM tools and compare pricing"
+> "Create a research brief on [topic]"
 
 **Documents**
 > "Turn my meeting notes into a professional PDF"
+> "Create an agenda for tomorrow's meeting"
 
-> "Create an agenda for tomorrow's team meeting"
+**Projects**
+> "Start a new project for the website redesign"
+> "Run my morning routine"
+> "Do a weekly review"
 
-**And much more** — see [docs/USE-CASES.md](docs/USE-CASES.md) for examples.
+**Development**
+> "Build a Python tool that converts CSV to JSON"
+> "Review this code change before I commit"
+
+**And much more** — see [docs/USE-CASES.md](docs/USE-CASES.md) for 22+ workflow examples.
+
+---
+
+## How It Grows With You
+
+```
+Week 1-2    Master the basics (email, calendar, notes, documents)
+Week 3-4    Use skills (eval harness, session handoff, content ingestion)
+Month 2     Customize (add your own skills, templates, agents)
+Month 3+    Expand (AWS infrastructure, business integrations)
+```
+
+The framework is progressive — start simple, activate features as you need them. See [docs/WHATS-NEXT.md](docs/WHATS-NEXT.md) for expansion paths.
 
 ---
 
 ## Important Notes
 
-### This is for Google Workspace
+**Drafts Only, Never Send** — Your agent creates email drafts for your review. It never sends anything automatically.
 
-The core integrations work with Gmail and Google Calendar. If you use Outlook/Microsoft 365, you can still use this kit, but email/calendar integrations won't work out of the box.
+**Google Workspace** — Core integrations work with Gmail and Google Calendar. Microsoft 365 users can still use the vault, tools, and skills — just not the email/calendar features.
 
-### Drafts Only, Never Send
+**YOLO Mode** — Your launch alias includes `--dangerously-skip-permissions`. This skips routine permission prompts. Safe for personal use in your own vault. See [docs/YOLO-MODE.md](docs/YOLO-MODE.md) for details.
 
-Your agent creates email **drafts**, not sent emails. You always review before sending. This is intentional.
-
-### YOLO Mode
-
-Your alias includes `--dangerously-skip-permissions`. This means your agent won't ask permission for routine operations. It's safe for personal use in your own vault.
-
-### Browser Control
-
-Your alias includes `--chrome`. This enables the agent to control your browser for web tasks. You'll see what it's doing, and it will ask before taking sensitive actions.
+**Security** — A pre-commit hook scans for PII and sensitive data before every commit. See [.security/README.md](.security/README.md) for the full security model.
 
 ---
 
@@ -126,7 +154,7 @@ Your alias includes `--chrome`. This enables the agent to control your browser f
 | Step | Time |
 |------|------|
 | Prerequisites | 10-15 min |
-| First Launch | 15-20 min |
+| First Launch + Identity | 15-20 min |
 | Chrome Extension | 10-15 min |
 | Google Integration | 20-30 min |
 | Eval Harnesses | 10 min |
@@ -134,40 +162,26 @@ Your alias includes `--chrome`. This enables the agent to control your browser f
 
 ---
 
-## What's Next?
+## Troubleshooting
 
-After you're comfortable with the basics:
+See [docs/TROUBLESHOOTING.md](docs/TROUBLESHOOTING.md) for common issues. Quick fixes:
 
-- [docs/USE-CASES.md](docs/USE-CASES.md) - Real examples and prompts
-- [docs/WHATS-NEXT.md](docs/WHATS-NEXT.md) - Advanced expansions
-- [tools/REGISTRY.md](tools/REGISTRY.md) - See all installed tools
+- **"Command not found"** — Use `npx @anthropic-ai/claude-code` instead of `claude`
+- **Chrome not connecting** — Ensure `--chrome` is in your alias, restart terminal and Chrome
+- **gogcli auth issues** — Re-run `gogcli auth login` with the right Google account
 
 ---
 
-## Troubleshooting
+## Contributing
 
-Common issues are covered in each doc. For quick fixes:
-
-**"Command not found"**
-- Use `npx @anthropic-ai/claude-code` instead of `claude`
-- This bypasses PATH issues entirely
-
-**Chrome extension not connecting**
-- Make sure your alias includes `--chrome`
-- Restart both terminal and Chrome
-
-**gogcli authentication issues**
-- Re-run `gogcli auth login`
-- Make sure you're using the right Google account
+We welcome contributions. See [docs/CONTRIBUTING.md](docs/CONTRIBUTING.md) for guidelines.
 
 ---
 
 ## Credits
 
-Built with lessons learned from months of daily AI assistant usage.
-
-Based on insights from real onboarding sessions with non-technical users.
+Built with lessons learned from months of daily AI assistant usage and real onboarding sessions with non-technical users.
 
 ---
 
-*Questions? Issues? Open a GitHub issue.*
+*Questions? Issues? Open a [GitHub Issue](https://github.com/stoic34/jarvis-ai-starter/issues).*

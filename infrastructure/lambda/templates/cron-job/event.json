@@ -1,0 +1,13 @@
+{
+  "version": "0",
+  "id": "abc12345-6789-0123-4567-890abcdef012",
+  "detail-type": "Scheduled Event",
+  "source": "aws.events",
+  "account": "123456789012",
+  "time": "2024-01-15T02:00:00Z",
+  "region": "us-east-1",
+  "resources": [
+    "arn:aws:events:us-east-1:123456789012:rule/daily-backup-task"
+  ],
+  "detail": {}
+}

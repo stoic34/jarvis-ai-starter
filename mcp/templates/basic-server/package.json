@@ -1,0 +1,16 @@
+{
+  "name": "mcp-basic-server-template",
+  "version": "1.0.0",
+  "description": "Template for building custom MCP servers",
+  "main": "server.js",
+  "type": "module",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.0.4"
+  },
+  "keywords": ["mcp", "template"],
+  "author": "",
+  "license": "MIT"
+}

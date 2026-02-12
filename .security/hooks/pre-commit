@@ -1,0 +1,42 @@
+#!/bin/sh
+#
+# Pre-commit hook: Runs PII scanner on staged files.
+# Blocks the commit if sensitive data or blocklist violations are found.
+#
+# Install:
+#   cp .security/hooks/pre-commit .git/hooks/pre-commit
+#   chmod +x .git/hooks/pre-commit
+#
+# Or symlink (auto-updates when hook changes):
+#   ln -sf ../../.security/hooks/pre-commit .git/hooks/pre-commit
+
+echo "Running PII scanner on staged files..."
+
+# Find the scanner relative to the repo root
+REPO_ROOT=$(git rev-parse --show-toplevel)
+SCANNER="$REPO_ROOT/evals/pii-scanner.py"
+
+if [ ! -f "$SCANNER" ]; then
+    echo "Warning: PII scanner not found at $SCANNER"
+    echo "Skipping security scan."
+    exit 0
+fi
+
+# Run scanner in staged-file mode
+python3 "$SCANNER" --staged --quiet
+
+EXIT_CODE=$?
+
+if [ $EXIT_CODE -ne 0 ]; then
+    echo ""
+    echo "COMMIT BLOCKED by PII scanner."
+    echo ""
+    echo "Options:"
+    echo "  1. Remove the flagged content and re-stage"
+    echo "  2. Add false positives to the ALLOWLIST in evals/pii-scanner.py"
+    echo "  3. Skip this check (NOT recommended): git commit --no-verify"
+    echo ""
+    exit 1
+fi
+
+exit 0
