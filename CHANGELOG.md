@@ -56,6 +56,7 @@ All notable changes to the Jarvis AI Starter Kit.
 ## [1.0.0] — 2026-01-24
 
 ### Initial Release
+- Claude Code-first assistant pattern
 - 90-minute onboarding flow with naming ceremony
 - Google Workspace integration via gogcli (Gmail, Calendar, Contacts, Drive)
 - Browser automation via Claude for Chrome

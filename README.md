@@ -37,6 +37,27 @@ See [CHANGELOG.md](CHANGELOG.md) for the archive of major changes.
 
 ---
 
+## Version History and Runtime Choice
+
+**Version 1** started as a Claude Code starter kit. It focused on terminal-based agent work, a local vault, Google Workspace access, browser workflows through Claude for Chrome, and safety checks before publishing personal context.
+
+**The current version** uses `AGENTS.md` as the shared instruction layer. Codex reads `AGENTS.md` directly, while Claude Code can still use `CLAUDE.md` as a compatibility bridge. That means you can keep one operating manual for the assistant instead of maintaining separate instruction files for each runtime.
+
+**Start with Codex when:**
+- You are setting this up on a Mac
+- You want browser control and desktop/computer control
+- You want the assistant to help configure apps, permissions, OAuth, and local tools
+- You want an always-on MacBook or Mac mini that can be triggered remotely, including from your phone
+
+**Use Claude Code when:**
+- You already have a Claude Code workflow you like
+- You mainly want terminal-based coding, repo work, or existing Claude skills/agents
+- You want a second compatible runtime that can read the same assistant instructions
+
+The recommended pattern is not "Codex or Claude forever." It is `AGENTS.md` first, with Codex as the default Mac setup path and Claude Code as a compatible alternate runtime.
+
+---
+
 ## What You Get
 
 **Level 1 - Starter Kit**
