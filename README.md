@@ -130,6 +130,12 @@ Read [docs/05-REMOTE-MAC.md](docs/05-REMOTE-MAC.md).
 
 This is the pattern for a separate MacBook or Mac mini that stays online so you can trigger assistant work from your phone when you are away from your main laptop.
 
+### Migrating From the Older Claude Code Kit
+
+Read [docs/06-AI-AGENT-MIGRATION-GUIDE.md](docs/06-AI-AGENT-MIGRATION-GUIDE.md).
+
+This guide is written for both humans and AI agents. It explains the move from a Claude Code-first `CLAUDE.md` setup to an `AGENTS.md`-first setup that can run under Codex or Claude Code.
+
 ---
 
 ## Architecture
