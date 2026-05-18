@@ -57,7 +57,7 @@ def test_gemini_key():
     """Test Gemini API key is set."""
     key = os.environ.get('GEMINI_API_KEY')
     if key:
-        return True, f"GEMINI_API_KEY: set ({key[:8]}...)"
+        return True, "GEMINI_API_KEY: set"
     return False, "GEMINI_API_KEY: not set"
 
 

@@ -14,13 +14,13 @@ We welcome contributions to make Jarvis AI Starter better for everyone.
 - **Documentation improvements** — clearer explanations, more examples
 
 ### Nice to Have
-- **Platform support** — Windows improvements, Linux testing
+- **Platform support** — macOS/Codex workflow improvements, with Windows/Linux treated as advanced paths
 - **Tool improvements** — better error handling, new features
 - **Eval patterns** — new self-verification approaches
 - **Translations** — setup guides in other languages
 
 ### Not Looking For
-- **AI model comparisons** — this kit is built for Claude Code
+- **AI runtime comparisons** — this kit is Codex-first with Claude Code compatibility
 - **Proprietary integrations** — must be usable by anyone
 - **Complex infrastructure** — keep it simple, progressive disclosure
 
@@ -44,9 +44,10 @@ git checkout -b feature/your-feature-name
 ### 3. Make Changes
 
 Follow the patterns in existing files:
-- **Prompt templates**: See `.claude/prompts/` for format
-- **Skills**: See `.claude/skills/` for structure
-- **Agents**: See `.claude/agents/` for format
+- **Runtime instructions**: Start with `AGENTS.md`
+- **Legacy prompt templates**: See `.claude/prompts/` for Claude Code format
+- **Legacy skills**: See `.claude/skills/` for Claude Code structure
+- **Legacy agents**: See `.claude/agents/` for Claude Code format
 - **Tools**: See `tools/` for Python script patterns
 - **Docs**: See `docs/` for documentation style
 
@@ -61,7 +62,7 @@ Make sure there are no findings before submitting.
 ### 5. Test
 
 - If you added a tool, verify it works: `python3 evals/test-tools.py`
-- If you modified CLAUDE.md, test the onboarding flow
+- If you modified `AGENTS.md` or `CLAUDE.md`, test the onboarding flow in Codex and confirm Claude Code still has a clear compatibility path
 - If you added a skill, verify the frontmatter is valid
 
 ### 6. Submit a Pull Request

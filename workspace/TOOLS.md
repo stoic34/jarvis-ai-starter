@@ -1,60 +1,50 @@
 # Tool Inventory
 
-<!--
-  This file is the authoritative registry of all tools available to your AI.
-  Your AI checks this file before claiming it can't do something.
+This file is the assistant's local registry. Before claiming a tool is unavailable, inspect this file, then inspect `tools/`, then run the relevant `--help`.
 
-  When you install a new tool, add it here. When you remove one, delete the entry.
--->
+## Core Runtime
 
-## Core Tools (Included in Starter Kit)
+| Tool | Purpose | Status | Example |
+|------|---------|--------|---------|
+| `codex` | AI assistant runtime, CLI, desktop app launcher | [pending setup] | `codex --version` |
+| Codex Desktop | Browser, app, and computer-control workflows where available | [pending setup] | `codex app` |
+| `git` | Version control and safety net | [pending setup] | `git status --short` |
+| `python3` | Runs local tools | [pending setup] | `python3 --version` |
+
+## Starter Kit Tools
 
 | Tool | Purpose | Status | Example |
 |------|---------|--------|---------|
 | `gogcli` | Gmail, Calendar, Contacts, Drive | [pending setup] | `gogcli gmail search "from:boss"` |
-| `audio-transcribe.py` | Voice memo → text | [pending setup] | `python3 tools/audio-transcribe.py recording.m4a` |
-| `pdf-create.py` | Markdown → PDF | [pending setup] | `python3 tools/pdf-create.py --input notes.md` |
-| `md-to-html.py` | Markdown → HTML (for emails) | [pending setup] | `python3 tools/md-to-html.py --input draft.md` |
+| `audio-transcribe.py` | Voice memo to text | [pending setup] | `python3 tools/audio-transcribe.py recording.m4a` |
+| `pdf-create.py` | Markdown to PDF | [pending setup] | `python3 tools/pdf-create.py --input notes.md` |
+| `md-to-html.py` | Markdown to HTML for email drafts | [pending setup] | `python3 tools/md-to-html.py --input draft.md` |
 
-## Browser Automation
-
-| Tool | Purpose | Status | Notes |
-|------|---------|--------|-------|
-| Claude for Chrome | Web navigation, form filling, research | [pending setup] | Requires Chrome extension |
-
-## User-Installed Tools
-
-<!--
-  Add tools you install yourself. Use this format:
-
-  | `tool-name` | What it does | verified | `tool-name --example` |
--->
+## Optional Remote Mac Tools
 
 | Tool | Purpose | Status | Example |
 |------|---------|--------|---------|
-| | | | |
+| Tailscale | Private remote access to another Mac | [optional] | `tailscale status` |
+| SSH | Remote shell access | [optional] | `ssh user@host` |
+| Screen Sharing | Remote desktop access | [optional] | macOS Screen Sharing app |
 
-## Installation Notes
+## Legacy Claude Code Compatibility
 
-<!--
-  Record any special setup steps, API keys needed, or quirks:
+| Tool | Purpose | Status | Notes |
+|------|---------|--------|-------|
+| Claude Code | Alternate runtime | [optional] | Uses `CLAUDE.md`, which points back to `AGENTS.md` |
+| Claude for Chrome | Legacy browser-control route | [optional] | Prefer Codex Desktop for the current setup |
 
-  - gogcli: Requires Google Cloud project + OAuth credentials
-  - audio-transcribe.py: Needs GEMINI_API_KEY environment variable
-  - pdf-create.py: Needs weasyprint (pip3 install weasyprint)
--->
-
-### Environment Variables Needed
+## Environment Variables
 
 | Variable | Tool | How to Get |
 |----------|------|------------|
-| `GEMINI_API_KEY` | audio-transcribe.py | [ai.google.dev](https://ai.google.dev/) |
+| `GEMINI_API_KEY` | `audio-transcribe.py` | https://ai.google.dev/ |
 
 ## Discovery Protocol
 
-**Before claiming you can't do something:**
-
-1. Check this file for available tools
-2. Check `tools/` directory for scripts
-3. Run `tool-name --help` to see capabilities
-4. If still stuck, tell the user what you need
+1. Check this file.
+2. Check `tools/`.
+3. Run `tool-name --help`.
+4. Check whether a desktop app and shell binary are different.
+5. If still stuck, report the exact missing dependency.

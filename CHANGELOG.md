@@ -4,6 +4,22 @@ All notable changes to the Jarvis AI Starter Kit.
 
 ---
 
+## [3.0.0] — 2026-05-18
+
+### Changed
+- **Codex-first setup** — The recommended runtime is now Codex on macOS.
+- **Portable instruction layer** — Added `AGENTS.md` as the source-of-truth instruction file for Codex and other AGENTS-compatible agents.
+- **Claude compatibility** — Replaced the old Claude-first `CLAUDE.md` with a compatibility loader that points back to `AGENTS.md`.
+- **Mac-first onboarding** — Updated prerequisites, first launch, macOS setup, architecture, troubleshooting, and vault getting-started docs around the Mac + Codex path.
+- **Desktop/browser automation** — Reframed the old Chrome extension doc around Codex Desktop, browser workflows, and computer-control workflows.
+- **Remote Mac worker** — Added `docs/05-REMOTE-MAC.md` for the always-on MacBook/Mac mini pattern.
+
+### Deprecated
+- **Windows as first-class setup** — Windows remains possible but is now documented as a legacy/advanced path.
+- **Claude Code as default runtime** — Claude Code remains compatible, but no longer owns the starter-kit architecture.
+
+---
+
 ## [2.0.0] — 2026-02-12
 
 ### Added
@@ -40,6 +56,7 @@ All notable changes to the Jarvis AI Starter Kit.
 ## [1.0.0] — 2026-01-24
 
 ### Initial Release
+- Claude Code-first assistant pattern
 - 90-minute onboarding flow with naming ceremony
 - Google Workspace integration via gogcli (Gmail, Calendar, Contacts, Drive)
 - Browser automation via Claude for Chrome
