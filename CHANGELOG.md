@@ -4,6 +4,14 @@ All notable changes to the Jarvis AI Starter Kit.
 
 ---
 
+## [3.0.1] — 2026-05-18
+
+### Added
+- **AI agent migration guide** — Added `docs/06-AI-AGENT-MIGRATION-GUIDE.md` for people upgrading from the older Claude Code-first kit to the newer `AGENTS.md` + Codex pattern.
+- **README migration link** — Added a direct README link to the migration guide for humans and AI agents.
+
+---
+
 ## [3.0.0] — 2026-05-18
 
 ### Changed
