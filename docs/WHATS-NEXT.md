@@ -126,9 +126,11 @@ This is advanced territory but becomes valuable as your usage scales.
 
 ## Learning Resources
 
-**Claude Code:**
-- [Official Documentation](https://claude.ai/code/docs)
-- Community Discord/Forums
+**Codex:**
+- [Codex documentation](https://developers.openai.com/codex/)
+
+**Claude Code compatibility:**
+- Keep `CLAUDE.md` as a loader back to `AGENTS.md` if you use Claude Code.
 
 **Obsidian:**
 - [Obsidian Help](https://help.obsidian.md/)

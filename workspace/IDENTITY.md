@@ -2,7 +2,7 @@
 
 <!--
   This file defines your AI assistant's personality and communication style.
-  It's separated from CLAUDE.md so you can customize your agent without
+  It's separated from AGENTS.md so you can customize your agent without
   touching the operational instructions.
 
   Configure this during onboarding, or edit anytime to adjust personality.

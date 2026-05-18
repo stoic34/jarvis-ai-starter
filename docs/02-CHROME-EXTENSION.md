@@ -1,202 +1,125 @@
-# Chrome Extension: Give Your Agent Eyes and Hands
+# Desktop and Browser Automation
 
-Claude Code can read files and run commands. But with the Chrome extension, it can also **see and interact with websites**.
+This file keeps its original name for link compatibility, but the recommended workflow is now broader than a Chrome extension.
 
-This is how your agent will help you set up Google integrations without you having to navigate Google Cloud Console yourself.
+Codex on macOS can support three useful control surfaces:
 
-**Time required:** 10-15 minutes
-
----
-
-## Why Browser Control Matters
-
-Without the Chrome extension, setting up APIs looks like this:
-
-1. You open Google Cloud Console
-2. You try to find the right menu
-3. You click through 15 screens
-4. You get confused about which button to click
-5. You paste things in the wrong place
-6. You spend an hour on something that should take 10 minutes
-
-**With the Chrome extension:**
-
-1. You tell your agent: "Set up Gmail access for me"
-2. Claude opens the browser and navigates for you
-3. Claude says: "Click the blue 'Authorize' button"
-4. You click
-5. Done
-
-**The agent handles navigation. You handle authorization.**
-
-This is possible because your alias includes `--chrome`, which enables browser control.
+1. **Terminal and local shell** - reading files, editing files, running tools
+2. **Browser workflows** - opening pages, navigating setup flows, researching
+3. **Computer use** - clicking, typing, and inspecting local Mac apps when available
 
 ---
 
-## Step 1: Install Claude for Chrome
+## Why This Matters
 
-1. Open Chrome
-2. Go to the [Chrome Web Store](https://chrome.google.com/webstore)
-3. Search for "Claude for Chrome" (by Anthropic)
-4. Click **Add to Chrome**
-5. Confirm by clicking **Add extension**
+Many assistant setup tasks are not just command-line tasks.
 
-### Pin It to Your Toolbar
+Examples:
 
-1. Click the puzzle piece icon (Extensions) in Chrome toolbar
-2. Find "Claude for Chrome"
-3. Click the pin icon
+- Google Cloud OAuth setup
+- App permission checks
+- Obsidian vault setup
+- Tailscale status checks
+- Browser-based research
+- Screen-based troubleshooting
 
-You'll see the Claude icon in your toolbar.
+The assistant should do the navigation and verification. You should handle sensitive approvals, passwords, and final sending.
 
 ---
 
-## Step 2: Connect to Claude Code
+## Recommended Path: Codex Desktop on Mac
 
-The Chrome extension needs to communicate with Claude Code running in your terminal.
+Launch Codex Desktop:
 
-**Launch your agent** (using your alias):
 ```bash
-jarvis
+codex app
 ```
 
-The `--chrome` flag in your alias tells Claude Code to look for the Chrome extension.
+Then confirm the app has the permissions needed for the workflows you want:
 
-**In Chrome:**
-1. Click the Claude icon in your toolbar
-2. It should show "Connected" or similar status
-3. If prompted, allow the connection
+- Files and folders that contain your workspace
+- Browser access if you want web navigation
+- Accessibility and screen-related permissions if you want computer-control workflows
 
----
+Ask the assistant:
 
-## Step 3: Test Browser Control
+> "Check what desktop or browser control you have available, then tell me what permissions are missing."
 
-Let's verify Claude can control your browser.
-
-**Say to your agent:**
-> "Test browser control by opening google.com and taking a screenshot"
-
-Claude should:
-1. Open a new Chrome tab
-2. Navigate to google.com
-3. Take a screenshot
-4. Show you the result or confirm success
-
-**If this works, browser control is ready.**
+Do not grant broad permissions blindly. Grant the minimum needed for the workflows you actually want.
 
 ---
 
-## What Your Agent Can Do in the Browser
+## Browser Workflows
 
-With browser control enabled, your agent can:
+Use browser workflows for:
 
-### Navigate and Read
-- Open any URL
-- Read page content
-- Extract text from articles
-- Scroll through pages
+- Research
+- Reading documentation
+- Filling non-sensitive forms
+- Navigating setup screens while you authorize manually
 
-### Interact
-- Click buttons and links
-- Fill out forms
-- Select dropdowns
-- Handle popups
+Ask:
 
-### Capture
-- Take screenshots
-- Record actions as GIFs
-- Save page content
+> "Open the browser and help me set up the Google Cloud OAuth client. I will handle passwords and final authorization clicks."
 
-### Research
-- Search Google
-- Gather information from multiple sites
-- Compare data across pages
+Rules:
+
+- The assistant can navigate.
+- The assistant can explain what to click.
+- You handle passwords, payment details, and irreversible approvals.
 
 ---
 
-## What Your Agent Cannot Do
+## Computer Use Workflows
 
-For security, your agent will **not**:
+Use computer control when the task requires a real desktop app:
 
-- Enter passwords for you
-- Enter credit card information
-- Accept terms and conditions without asking
-- Download files without permission
-- Access pages requiring login (unless you log in first)
+- Inspecting System Settings
+- Checking Obsidian behavior
+- Verifying an app is running
+- Reading a local window
+- Capturing visual evidence
 
-**The rule:** Your agent navigates, you authorize.
+Ask:
 
----
+> "Use computer control to check whether Codex has the permissions it needs, then report only what you observed."
 
-## Common Use Cases
-
-### Research
-> "Research the top 5 CRM tools for small businesses, compare their pricing, and summarize in a table"
-
-### Data Extraction
-> "Go to [URL] and extract the product names and prices into a spreadsheet format"
-
-### Form Assistance
-> "Help me fill out this job application form—I'll give you the details and you navigate"
-
-### API Setup (Coming Next)
-> "Set up gogcli by navigating Google Cloud Console and telling me when to click"
+Good computer-use tasks are narrow and observable. Avoid vague instructions like "fix my computer."
 
 ---
 
-## Troubleshooting
+## Legacy: Claude for Chrome
 
-### "Not connected" in Chrome extension
+Claude Code users can still use Claude for Chrome if they prefer the legacy setup.
 
-- Make sure Claude Code is running with the `--chrome` flag
-- Try restarting both the terminal and Chrome
-- Check that the extension is enabled (not disabled in Chrome settings)
+That path is no longer the recommended first setup because this starter kit now assumes Codex and `AGENTS.md`.
 
-### Claude says it can't control the browser
+If you use Claude Code:
 
-- Verify your alias includes `--chrome`
-- Try launching manually with the full command:
-  ```bash
-  npx @anthropic-ai/claude-code --dangerously-skip-permissions --chrome
-  ```
-
-### Screenshots are blank
-
-- Some pages block screenshots (banking sites, etc.)
-- Try a different page to verify it works
-- Check Chrome's permissions for screen capture
-
-### "Permission denied" for certain actions
-
-This is intentional. Claude will ask before:
-- Downloading files
-- Entering form data
-- Clicking "submit" or "purchase" buttons
-
-Just confirm when asked.
+- Keep `CLAUDE.md`
+- Read the legacy Claude for Chrome docs from Anthropic
+- Treat `.claude/` as the Claude-specific capability layer
 
 ---
 
 ## Security Notes
 
-**Browser control is powerful.** A few safety tips:
+Do not let any assistant:
 
-1. **Don't use on banking sites**: Even though Claude won't enter passwords, avoid navigating to sensitive financial pages
-2. **Watch what's happening**: Browser control is visible—you can see what Claude is doing
-3. **Claude can only access open tabs**: It can't access private browsing or other browser profiles
-4. **You control authorization**: For any OAuth flow, YOU click the authorize button
+- Enter passwords
+- Enter credit card information
+- Accept legal terms without your explicit approval
+- Send email directly
+- Move or delete important files without confirmation
 
----
-
-## What You've Accomplished
-
-- Installed Claude for Chrome extension
-- Connected it to Claude Code
-- Verified browser control works
-- Understand what's possible (and what's protected)
-
-**Next:** Set up Google integration with AI-guided navigation → [03-GOOGLE-INTEGRATION.md](03-GOOGLE-INTEGRATION.md)
+The assistant navigates and drafts. You authorize and send.
 
 ---
 
-*Time to complete: 10-15 minutes*
+## What You Accomplished
+
+- Understood why Codex Desktop is recommended
+- Separated terminal, browser, and computer-control workflows
+- Kept Claude for Chrome as a legacy option
+
+Next: [03-GOOGLE-INTEGRATION.md](03-GOOGLE-INTEGRATION.md)

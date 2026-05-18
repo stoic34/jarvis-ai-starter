@@ -6,76 +6,83 @@ Common issues and how to fix them.
 
 ## Setup Issues
 
-### "npx: command not found"
+### `codex: command not found`
 
-**Problem**: Node.js isn't installed or not in your PATH.
+Codex is not installed or your shell cannot find it.
 
-**Fix**:
+Fix:
+
 ```bash
-# macOS
-brew install node
-
-# Windows
-# Download from https://nodejs.org/
+npm install -g @openai/codex
+codex --version
 ```
 
-Then restart your terminal and try again.
+Then restart Terminal.
+
+If installed through the desktop app, also try:
+
+```bash
+codex app
+```
 
 ---
 
-### "gogcli: command not found"
+### Codex starts but ignores the starter-kit instructions
 
-**Problem**: gogcli isn't installed.
+You probably launched Codex from the wrong directory.
 
-**Fix**:
+Fix:
+
 ```bash
-# macOS
-brew install gogcli/tap/gogcli
+cd ~/Documents/jarvis-ai-starter
+ls AGENTS.md
+codex
+```
 
-# Other platforms
-# Download from https://github.com/gogcli/gogcli/releases
+`AGENTS.md` must be at the workspace root.
+
+---
+
+### `gogcli: command not found`
+
+Install it:
+
+```bash
+brew install gogcli/tap/gogcli
+```
+
+Then:
+
+```bash
+gogcli auth login
 ```
 
 ---
 
 ### Google OAuth "Access Denied" or "App not verified"
 
-**Problem**: Your Google Cloud project needs OAuth consent screen configured.
+Your Google Cloud project likely needs OAuth consent configured.
 
-**Fix**:
-1. Go to [Google Cloud Console](https://console.cloud.google.com/)
-2. Select your project
-3. Go to "APIs & Services" → "OAuth consent screen"
-4. Set to "External" (or "Internal" if using Google Workspace)
-5. Add your email as a test user
-6. Try `gogcli auth login` again
+Fix:
 
----
+1. Open Google Cloud Console
+2. Select the project
+3. Go to APIs & Services
+4. Configure the OAuth consent screen
+5. Add yourself as a test user if needed
+6. Re-run `gogcli auth login`
 
-### "weasyprint: command not found" (PDF generation fails)
-
-**Problem**: WeasyPrint dependencies aren't installed.
-
-**Fix**:
-```bash
-# macOS
-brew install pango
-
-# Then reinstall Python package
-pip3 install weasyprint
-```
+Ask the assistant to navigate and explain, but you should handle final authorization clicks.
 
 ---
 
-### Python "externally-managed-environment" error
+### Python `externally-managed-environment` error
 
-**Problem**: macOS Python 3.12+ uses PEP 668, blocking global pip installs.
+Use a virtual environment:
 
-**Fix**: Use a virtual environment:
 ```bash
 python3 -m venv .venv
-source .venv/bin/activate  # macOS/Linux
-# or: .venv\Scripts\activate  # Windows
+source .venv/bin/activate
 pip install -r tools/requirements.txt
 ```
 
@@ -83,106 +90,104 @@ pip install -r tools/requirements.txt
 
 ## Runtime Issues
 
-### Agent doesn't remember previous sessions
+### The assistant does not remember previous sessions
 
-**This is expected.** Each Claude Code session starts fresh. That's why we use:
-- `workspace/CONTEXT.md` — for standing context
-- CONTINUATION notes — for in-progress work
-- `vault/` notes — for persistent knowledge
+This is normal. Persistent context lives in files:
 
-**Tip**: Start each session with "Check for any CONTINUATION notes" or update CONTEXT.md with current priorities.
+- `workspace/CONTEXT.md`
+- `vault/Daily/`
+- continuation notes
+- project notes
 
----
+Start by asking:
 
-### Agent claims it can't use a tool that's installed
-
-**Fix**: Check `workspace/TOOLS.md` — the agent reads this file to know what's available. If the tool isn't listed there, add it.
-
-Then tell the agent: "Check workspace/TOOLS.md again — I've updated it."
+> "Read the current context and tell me what you know before we continue."
 
 ---
 
-### Agent tries to send an email directly
+### The assistant claims a tool is unavailable
 
-**This should never happen** — CLAUDE.md explicitly forbids it. If it does:
-1. The `deny` rule in `.claude/settings.json` should block it
-2. Cancel the operation
-3. Remind the agent: "Only create drafts, never send"
+Ask it to check in order:
+
+1. `workspace/TOOLS.md`
+2. `tools/`
+3. `tool-name --help`
+4. shell PATH
+
+Do not accept "I can't" until it has checked the local tool inventory.
 
 ---
 
-### Pre-commit hook blocks a commit
+### The assistant tries to send an email
 
-**The hook found sensitive data in your staged files.**
+Stop it.
 
-Options:
-1. **Remove the sensitive content** and re-stage the files
-2. **Add false positives to the allowlist** in `evals/pii-scanner.py`
-3. **Last resort**: `git commit --no-verify` (not recommended — bypasses the scanner)
+The rule is draft-only:
 
-To see what was flagged:
 ```bash
-python3 evals/pii-scanner.py --staged
+gogcli gmail drafts create ...
+```
+
+Never:
+
+```bash
+gogcli gmail send ...
+gogcli gmail drafts send ...
 ```
 
 ---
 
-### Browser automation not working
+### Desktop or browser control is unavailable
 
-**Check**:
-1. Is the Claude for Chrome extension installed? Check `chrome://extensions/`
-2. Is Chrome running? The extension needs an open Chrome window
-3. Did you launch with `--chrome` flag? Check your alias
+Check:
 
-**If the extension is installed but not responding:**
-- Close and reopen Chrome
-- Check the extension's console for errors
+- Are you using Codex Desktop, not only a headless shell?
+- Has macOS granted the needed permissions?
+- Is the browser open?
+- Did you ask for a task that actually requires UI control?
+
+Ask:
+
+> "Inspect what desktop and browser tools are available in this session and list missing permissions."
+
+---
+
+### Remote Mac is unavailable
+
+Check:
+
+- Is the Mac awake?
+- Is it on power?
+- Is Tailscale connected?
+- Is Screen Sharing or SSH reachable?
+- Is Codex installed for the correct macOS user?
+- Can that user read the vault path?
+
+Important: the desktop app and SSH shell may not share the same PATH. A remote shell can fail to find `codex` even while the Codex desktop app is running.
 
 ---
 
 ### Audio transcription fails
 
-**Check**:
-1. Is `GEMINI_API_KEY` set in your environment?
-   ```bash
-   echo $GEMINI_API_KEY
-   ```
-2. Is the audio file a supported format? (m4a, mp3, wav, etc.)
-3. Is the file too large? Gemini has upload limits.
+Check:
 
-**Set the API key**:
 ```bash
-# Add to your shell profile (~/.zshrc or ~/.bashrc)
+echo $GEMINI_API_KEY
+```
+
+If missing, set it in your shell profile:
+
+```bash
 export GEMINI_API_KEY="your-key-here"
 ```
 
-Get a key at [ai.google.dev](https://ai.google.dev/).
-
----
-
-## Performance Issues
-
-### Claude Code is slow to start
-
-**Normal.** The first launch downloads the latest version via `npx`. Subsequent launches in the same terminal session are faster.
-
-**Tip**: If you use it daily, consider installing globally:
-```bash
-npm install -g @anthropic-ai/claude-code
-```
-
----
-
-### Long responses get cut off
-
-Claude has a maximum output length per response. If a response seems incomplete:
-- Say "continue" to get the rest
-- For very long outputs, ask for them in sections
+Then retry with a supported audio format.
 
 ---
 
 ## Getting More Help
 
-1. **Claude Code docs**: [claude.ai/code/docs](https://claude.ai/code/docs)
-2. **File an issue**: [GitHub Issues](https://github.com/stoic34/jarvis-ai-starter/issues)
-3. **Ask your agent**: It can often diagnose and fix its own issues
+- Read `AGENTS.md`
+- Read `workspace/TOOLS.md`
+- Read [docs/05-REMOTE-MAC.md](05-REMOTE-MAC.md) for remote setup
+- File an issue at https://github.com/stoic34/jarvis-ai-starter/issues

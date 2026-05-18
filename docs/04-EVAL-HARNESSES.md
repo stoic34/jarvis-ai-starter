@@ -236,7 +236,7 @@ Let's practice. Ask your agent:
 > 1. Verify you know my name
 > 2. Verify you can read files in the vault
 > 3. Verify gogcli is working (test Gmail access)
-> 4. Verify Claude for Chrome is connected
+> 4. Verify the available browser or desktop-control workflow is connected
 > 5. Verify you can create a file in the vault
 >
 > Create a checklist, test each item, and report results."
